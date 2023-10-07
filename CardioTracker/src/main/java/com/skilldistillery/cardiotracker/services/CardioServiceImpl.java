@@ -1,6 +1,7 @@
 package com.skilldistillery.cardiotracker.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,21 +22,41 @@ public class CardioServiceImpl implements CardioService {
 	}
 
 	@Override
-	public Cardio retrieveCardio() {
-		// TODO Auto-generated method stub
-		return null;
+	public Cardio retrieveCardio(int id) {
+		Optional<Cardio> workout = cardioRepo.findById(id);
+		if (workout.isPresent()) {
+			return workout.get();
+		} else {
+			
+			return null;
+		}
 	}
 
 	@Override
-	public Cardio create() {
-		// TODO Auto-generated method stub
-		return null;
+	public Cardio create(Cardio workout) {
+		return cardioRepo.saveAndFlush(workout);
 	}
 
 	@Override
 	public Cardio update(int cardioId, Cardio updatingCardio) {
-		// TODO Auto-generated method stub
-		return null;
+		Cardio dbWorkout = cardioRepo.findById(cardioId);
+		
+		if (dbWorkout != null) {
+			dbWorkout.setCardioDate(updatingCardio.getCardioDate());
+			dbWorkout.setDescription(updatingCardio.getDescription());
+			dbWorkout.setDifficultyLevel(updatingCardio.getDifficultyLevel());
+			dbWorkout.setDistance(updatingCardio.getDistance());
+			dbWorkout.setEnabled(updatingCardio.isEnabled());
+			dbWorkout.setStartTime(updatingCardio.getStartTime());
+			dbWorkout.setStopTime(updatingCardio.getStopTime());
+			dbWorkout.setTitle(updatingCardio.getTitle());
+			dbWorkout.setType(updatingCardio.getType());
+			dbWorkout.setURLImage(updatingCardio.getURLImage());
+			cardioRepo.saveAndFlush(dbWorkout);
+		}
+		
+		
+		return dbWorkout;
 	}
 
 	@Override

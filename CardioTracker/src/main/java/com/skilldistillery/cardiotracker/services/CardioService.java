@@ -8,9 +8,9 @@ public interface CardioService {
 		
 	List<Cardio> getAllCardio();
 	
-	Cardio retrieveCardio();
+	Cardio retrieveCardio(int id);
 	
-	Cardio create();
+	Cardio create(Cardio workout);
 	
 	Cardio update(int cardioId, Cardio updatingCardio);
 	
