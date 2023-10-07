@@ -20,30 +20,30 @@ import com.skilldistillery.cardiotracker.services.CardioService;
 @RestController
 @RequestMapping("api")
 public class CardioController {
-	
+
 	@Autowired
 	private CardioService cardioService;
-	
+
 	@GetMapping("workouts")
-	public List<Cardio> listCardio(){
+	public List<Cardio> listCardio() {
 		return cardioService.getAllCardio();
 	}
-	
+
 	@GetMapping("workouts/{id}")
-	public Cardio show(@PathVariable int id, HttpServletResponse res){
+	public Cardio show(@PathVariable int id, HttpServletResponse res) {
 		Cardio workout = cardioService.retrieveCardio(id);
-		if(workout == null) {
+		if (workout == null) {
 			res.setStatus(404);
 		}
 		return workout;
 	}
-	
+
 	@PostMapping("workouts")
 	public Cardio create(@RequestBody Cardio workout) {
 		workout = cardioService.create(workout);
 		return workout;
 	}
-	
+
 	@PutMapping("workouts/{id}")
 	public Cardio update(@PathVariable int id, @RequestBody Cardio workout, HttpServletResponse res) {
 		Cardio updatedWorkout = null;
@@ -58,10 +58,17 @@ public class CardioController {
 		}
 		return updatedWorkout;
 	}
-	
+
 	@DeleteMapping("workouts/{id}")
-	public void delete(@PathVariable int id) {
-		cardioService.delete(id);
+	public void delete(@PathVariable Integer id, HttpServletResponse res) {
+		try {
+			cardioService.delete(id);
+			res.setStatus(204);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
 	}
 
 }

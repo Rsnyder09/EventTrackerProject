@@ -9,6 +9,6 @@ import com.skilldistillery.cardiotracker.entities.Cardio;
 public interface CardioRepository extends JpaRepository<Cardio, Integer> {
 Cardio findById(int id);
 
-@Transactional
-long deleteById(int id);
+
+
 }

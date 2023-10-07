@@ -1,7 +1,8 @@
 package com.skilldistillery.cardiotracker.services;
 
 import java.util.List;
-import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +12,7 @@ import com.skilldistillery.cardiotracker.repositories.CardioRepository;
 
 
 @Service
+@Transactional
 public class CardioServiceImpl implements CardioService {
 	
 	@Autowired 
@@ -61,7 +63,10 @@ public class CardioServiceImpl implements CardioService {
 
 	@Override
 	public void delete(int cardioId) {
-		cardioRepo.deleteById(cardioId);
+		
+		 cardioRepo.deleteById(cardioId);
+		
+	
 		
 	}
 
