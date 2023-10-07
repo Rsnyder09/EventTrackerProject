@@ -8,19 +8,35 @@
 
 # Technologies Used
 •	MySQL
+
 •	MySQL Workbench
+
 •	Gradle 
+
 •	MAMP
+
 •	JDBC
+
 •	Java
+
 •	Spring Tool Suite/Eclipse 
+
 •	Git
+
 •	GitHub
+
 •	Sublime
+
 •	Spring Boot
+
 •	JPA
+
 •	Google
+
 •	JSON
+
+•	REST
+
 
 
 
@@ -38,3 +54,14 @@
 
 •	Using JSONIgnore
 
+
+
+# REST API
+
+| HTTP Verb | URI             | Request Body | Response Body | Status |
+|-----------|-----------------|--------------|---------------|---------|
+| GET       | `/api/workouts`    |              | List of dives | 200   |
+| GET       | `/api/workouts/{id}` |              | Single dive   | 200 or 404 |
+| POST      | `/api/workouts`    | JSON of new workout       | JSON of created workout | 201 or 400 |
+| PUT       | `/api/workouts/{id}` | JSON for updating workout | JSON of updated workout | 200, 404, or 400 |
+| DELETE    | `/api/workouts/{id}` |              | | 204, 404, or 400 |
