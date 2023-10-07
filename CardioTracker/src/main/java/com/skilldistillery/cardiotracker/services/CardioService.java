@@ -14,7 +14,7 @@ public interface CardioService {
 	
 	Cardio update(int cardioId, Cardio updatingCardio);
 	
-	boolean delete(int cardioId);
+	void delete(int cardioId);
 	
 	
 }

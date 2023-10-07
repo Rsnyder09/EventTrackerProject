@@ -23,9 +23,9 @@ public class CardioServiceImpl implements CardioService {
 
 	@Override
 	public Cardio retrieveCardio(int id) {
-		Optional<Cardio> workout = cardioRepo.findById(id);
-		if (workout.isPresent()) {
-			return workout.get();
+		Cardio workout = cardioRepo.findById(id);
+		if (workout != null) {
+			return workout;
 		} else {
 			
 			return null;
@@ -60,9 +60,9 @@ public class CardioServiceImpl implements CardioService {
 	}
 
 	@Override
-	public boolean delete(int cardioId) {
-		// TODO Auto-generated method stub
-		return false;
+	public void delete(int cardioId) {
+		cardioRepo.deleteById(cardioId);
+		
 	}
 
 }
