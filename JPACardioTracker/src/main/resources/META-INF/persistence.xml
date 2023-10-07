@@ -10,6 +10,8 @@
 	
 	
 	<class>com.skilldistillery.cardiotracker.entities.Cardio</class>
+	<class>com.skilldistillery.cardiotracker.entities.DifficultyLevel</class>
+	<class>com.skilldistillery.cardiotracker.entities.Type</class>
 	
 	
 	
