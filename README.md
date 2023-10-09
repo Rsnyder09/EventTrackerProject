@@ -76,3 +76,26 @@
 | GET       | `/api/levels`              |                           | List of levels            | 200 or 404       |
 | GET       | `/api/levels/{id}`         |                           | Single level              | 200 or 404       |
 | GET       | `/api/levels/{id}/workouts`|                           | List workouts by level id | 200 or 404       |
+
+
+# JSON
+
+`{
+        "id": 1,
+        "title": "Aurora Reservoir Walk",
+        "cardioDate": "2023-10-06",
+        "startTime": "06:00:00",
+        "stopTime": "06:30:00",
+        "distance": 1,
+        "enabled": true,
+        "description": "Great views for a casual walk",
+        "type": {
+            "id": 1,
+            "name": "Walk"
+        },
+        "difficultyLevel": {
+            "id": 1,
+            "name": "Minimum Effort"
+        },
+        "urlimage": null
+    }`
