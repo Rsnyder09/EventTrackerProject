@@ -80,7 +80,8 @@
 
 # JSON
 
-`{
+```
+{
         "id": 1,
         "title": "Aurora Reservoir Walk",
         "cardioDate": "2023-10-06",
@@ -98,4 +99,5 @@
             "name": "Minimum Effort"
         },
         "urlimage": null
-    }`
+    }
+```
