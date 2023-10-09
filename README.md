@@ -74,4 +74,5 @@
 | GET       | `/api/types/{id}`          |                           | Single type               | 200 or 404       |
 | GET       | `/api/types/{id}/workouts` |                           | Lists workouts by type id | 200 or 404       |
 | GET       | `/api/levels`              |                           | List of levels            | 200 or 404       |
+| GET       | `/api/levels/{id}`         |                           | Single level              | 200 or 404       |
 | GET       | `/api/levels/{id}/workouts`|                           | List workouts by level id | 200 or 404       |
