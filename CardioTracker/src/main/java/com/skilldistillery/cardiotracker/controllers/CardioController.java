@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.skilldistillery.cardiotracker.entities.Cardio;
+import com.skilldistillery.cardiotracker.entities.Type;
 import com.skilldistillery.cardiotracker.services.CardioService;
+import com.skilldistillery.cardiotracker.services.TypeService;
 
 @RestController
 @RequestMapping("api")
@@ -23,10 +25,23 @@ public class CardioController {
 
 	@Autowired
 	private CardioService cardioService;
+	@Autowired
+	private TypeService typeService;
+	
+	
 
 	@GetMapping("workouts")
-	public List<Cardio> listCardio() {
-		return cardioService.getAllCardio();
+	public List<Cardio> listCardio(HttpServletResponse res) {
+		List<Cardio> workouts = null;
+		try {
+			workouts = cardioService.getAllCardio();
+			res.setStatus(200);
+		} catch (Exception e) {
+			res.setStatus(404);
+			e.printStackTrace();
+			
+		}
+		return workouts;
 	}
 
 	@GetMapping("workouts/{id}")
@@ -34,13 +49,21 @@ public class CardioController {
 		Cardio workout = cardioService.retrieveCardio(id);
 		if (workout == null) {
 			res.setStatus(404);
+		} else {
+			res.setStatus(200);
 		}
 		return workout;
 	}
 
 	@PostMapping("workouts")
-	public Cardio create(@RequestBody Cardio workout) {
+	public Cardio create(@RequestBody Cardio workout, HttpServletResponse res) {
+		try {
 		workout = cardioService.create(workout);
+		res.setStatus(201);
+		} catch (Exception e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
 		return workout;
 	}
 
@@ -49,6 +72,7 @@ public class CardioController {
 		Cardio updatedWorkout = null;
 		try {
 			updatedWorkout = cardioService.update(id, workout);
+				res.setStatus(200);
 			if (updatedWorkout == null) {
 				res.setStatus(404);
 			}
@@ -70,5 +94,8 @@ public class CardioController {
 			res.setStatus(400);
 		}
 	}
+	
+	
+	
 
 }

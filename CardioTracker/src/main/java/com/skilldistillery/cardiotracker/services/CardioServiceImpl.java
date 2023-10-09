@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.skilldistillery.cardiotracker.entities.Cardio;
 import com.skilldistillery.cardiotracker.repositories.CardioRepository;
+import com.skilldistillery.cardiotracker.repositories.TypeRepository;
 
 
 @Service
@@ -17,6 +18,9 @@ public class CardioServiceImpl implements CardioService {
 	
 	@Autowired 
 	private CardioRepository cardioRepo;
+	
+	@Autowired
+	TypeRepository typeRepo;
 
 	@Override
 	public List<Cardio> getAllCardio() {
@@ -69,5 +73,25 @@ public class CardioServiceImpl implements CardioService {
 	
 		
 	}
+
+	@Override
+	public List<Cardio> getAllCardioByType(int id) {
+		if (!typeRepo.existsById(id)) {
+		return null;
+		}
+		return cardioRepo.findByTypeId(id);
+	}
+
+	@Override
+	public List<Cardio> getAllCardioByDifficulty(int id) {
+		if (!typeRepo.existsById(id)) {
+			return null;
+			}
+		return cardioRepo.findByDifficultyLevelId(id);
+	}
+	
+	
+	
+	
 
 }

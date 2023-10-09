@@ -16,5 +16,8 @@ public interface CardioService {
 	
 	void delete(int cardioId);
 	
+	List<Cardio> getAllCardioByType(int id);
+	
+	List<Cardio> getAllCardioByDifficulty(int id);
 	
 }

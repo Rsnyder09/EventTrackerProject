@@ -54,14 +54,24 @@
 
 •	Using JSONIgnore
 
+•	While trying to get correct HTTPServletResponse codes, i found that if i enter an ID at the top of the json body in postman it seems to update the existing id. This is without having an ID listed in my http (Example: http://localhost:8086/api/workouts)
+
+•	I would like to have unique title names but am not sure how to do so. I will continue trying to solve this since i have plenty of time but updating README.md for now. 
+
+
 
 
 # REST API
 
 | HTTP Verb | URI             | Request Body | Response Body | Status |
 |-----------|-----------------|--------------|---------------|---------|
-| GET       | `/api/workouts`    |              | List of dives | 200   |
-| GET       | `/api/workouts/{id}` |              | Single dive   | 200 or 404 |
-| POST      | `/api/workouts`    | JSON of new workout       | JSON of created workout | 201 or 400 |
-| PUT       | `/api/workouts/{id}` | JSON for updating workout | JSON of updated workout | 200, 404, or 400 |
-| DELETE    | `/api/workouts/{id}` |              | | 204, 404, or 400 |
+| GET       | `/api/workouts`            |                           | List of workouts          | 200 or 404       |
+| GET       | `/api/workouts/{id}`       |                           | Single workout            | 200 or 404       |
+| POST      | `/api/workouts`            | JSON of new workout       | JSON of created workout   | 201 or 400       |
+| PUT       | `/api/workouts/{id}`       | JSON for updating workout | JSON of updated workout   | 200, 404, or 400 |
+| DELETE    | `/api/workouts/{id}`       |                           | Delete workout by id      | 204 or 400       |
+| GET       | `/api/types`               |                           | List of types             | 200 or 404       |
+| GET       | `/api/types/{id}`          |                           | Single type               | 200 or 404       |
+| GET       | `/api/types/{id}/workouts` |                           | Lists workouts by type id | 200 or 404       |
+| GET       | `/api/levels`              |                           | List of levels            | 200 or 404       |
+| GET       | `/api/levels/{id}/workouts`|                           | List workouts by level id | 200 or 404       |
