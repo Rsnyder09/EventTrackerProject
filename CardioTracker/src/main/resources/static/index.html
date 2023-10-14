@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<source>
+<meta charset="UTF-8">
+<title>Cardio Tracker</title>
+<script src="js/script.js"></script>
+</head>
+<body>
+
+<h1>Cardio Tracker</h1> 
+<img height="200px" width="200px" src="https://www.ivanachapman.com/wp-content/uploads/2017/10/fat-man-cardio-cartoon.jpg"/>
+
+<form name="cardioForm">
+	<input type="number" name="cardioId"/>
+<button name="lookup">Get Cardio Session By ID</button>
+</form>
+
+
+<div id="CardioDetailDiv"></div>
+
+<div id="editCardioFormDiv">
+	
+	
+</div>
+
+<div id="cardioListDiv"><hr></div>
+
+
+
+<div id="newCardioFormDiv">
+	<h3>Create a new cardio session</h3>
+	<form name="newCardioForm">
+	
+	<input type="hidden" name="enabled" value="true">
+	
+	
+	<label for="title">Title</label>
+	<input type="text" name ='title' />
+	<br>
+	<label for="description" >Description</label>
+	<input type="text" name ='description' />
+	<br>
+	<label for ='cardioDate'>Date</label>
+	<input type="date" name ='cardioDate' />
+	<br>
+	<label for ='startTime'> Start Time</label>
+	<input type="time" name ='startTime' />
+	<br>
+	<label for ='stopTime'>Stop Time</label>
+	<input type="time" name ='stopTime' />
+	<br>
+	<label for ='distance'>Distance</label>
+	<input type="number" name ='distance' />
+	<br>
+	<label for ='urlimage'>Image-URL</label>
+	<input type="text" name ='urlimage' />
+	<br>
+	<label for ='type'>Choose the type of cardio: </label>
+	<select name="type" id="type">
+		<option value="1">Walk</option>
+  		<option value="2">Hike</option>
+  		<option value="3">Run</option>
+  		<option value="4">Jump Rope</option>
+  		<option value="5">Row</option>
+  		<option value="6">Bike</option>
+  		<option value="7">Stairs</option>
+  		<option value="8">Swim</option>
+	</select>
+	<br>
+	<label for ='difficultyLevel'>Choose the difficulty level: </label>
+	<select name="difficultyLevel" id="difficultyLevel">
+		<option value="1">Minimum Effort</option>
+  		<option value="2">Light And Easy</option>
+  		<option value="3">Comfortable Pace</option>
+  		<option value="4">Comfortable With Some Effort</option>
+  		<option value="5">Progressive Pace</option>
+  		<option value="6">Hard Activity</option>
+  		<option value="7">Vigorous Activity</option>
+  		<option value="8">Hard Intensity</option>
+  		<option value="9">Very Hard Intensity</option>
+  		<option value="10">All-Out Sprint</option>
+	</select>
+	<br>
+
+	<button name="addCardioButton">Add New Cardio Session</button>
+</form>
+	
+</div>
+
+
+
+
+
+</body>
+</html>

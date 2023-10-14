@@ -20,7 +20,7 @@ public class CardioServiceImpl implements CardioService {
 	private CardioRepository cardioRepo;
 	
 	@Autowired
-	TypeRepository typeRepo;
+	private TypeRepository typeRepo;
 
 	@Override
 	public List<Cardio> getAllCardio() {
