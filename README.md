@@ -37,6 +37,10 @@
 
 •	REST
 
+•   JavaScript
+
+•   HTML
+
 
 
 
@@ -58,6 +62,9 @@
 
 •	I would like to have unique title names but am not sure how to do so. I will continue trying to solve this since i have plenty of time but updating README.md for now. 
 
+•   I am unable to get update to work, i keep getting a "uncaught TypeError, for my click button once i try and submit the form" I tried several different ways and would code a little and then test but nothing seemed to work. I was unable to finish the homework because of this. I would have moved on to "delete" but because the homework said don’t move on until you understand/complete what your working on I stayed on the update for a the majority of the weekend. I was unable to find an example of an update in the prior week course work and i couldn’t find a good example on google when researching HTML,JS, JSON,XHR. I also struggled trying to bring the ID that was searched into the URL. which might have been where the problem was but when searching my error or the internet it said there might be a typo somewhere so i looked for any typos i could find for a few hours and was unable to find one.  
+
+•   building tables in js was challenging but i was able to figure it out. once i got the concept it seemed simple.
 
 
 

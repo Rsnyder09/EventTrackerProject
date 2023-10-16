@@ -9,7 +9,7 @@ window.addEventListener('load', function(e) {
 function init() {
 	//ADD event listeners for existing button
 	loadAllCardioSessions();
-
+	
 	document.cardioForm.lookup.addEventListener('click', function(event) {
 		event.preventDefault();
 		let cardioId = document.cardioForm.cardioId.value;
@@ -41,7 +41,6 @@ function init() {
 		e.preventDefault();
 		
 		let updateCardio = {
-			id: document.getElementById('CardioDetailDiv').getElementById('id').value,
 			enabled: document.updateFormDiv.enabled.value,
 			title: document.updateFormDiv.title.value,
 			description: document.updateFormDiv.description.value,
@@ -59,6 +58,24 @@ function init() {
 
 
 };
+
+function updateButtonFunction(){
+	
+	
+	let div = document.getElementById('editCardioFormDiv')
+	div.textContent = "";
+	
+	
+	let button = document.createElement('button')
+	button.name = "updateButton";
+	button.textContent = "Update Session";
+	
+	
+	button.addEventListener('click', displayUpdateCardioSession )
+	div.appendChild(button);
+}
+
+
 
 function displayError(message) {
 	let detailDiv = document.getElementById('CardioDetailDiv');
@@ -237,14 +254,17 @@ function displayCardioSessionById(cardio) {
 	form.name = "updateForm"
 	cardioDetailDiv.appendChild(form);
 	
-	let button = document.createElement('button')
+	/*let button = document.createElement('button')
 	button.name = "updateButton";
 	button.textContent = "Update Session";
 	
 	
 	button.addEventListener('click', displayUpdateCardioSession )
-	form.appendChild(button);
+	form.appendChild(button);*/
 	
+	//OR
+	
+	updateButtonFunction();
 	
 }
 
@@ -280,17 +300,17 @@ function addCardioSession(newCardio) {
 
 
 
-function updateCardioSession(updatedCardioId){
-	console.log(updatedCardioId)
+function updateCardioSession(cardioId){
+	console.log(cardioId)
 	let xhr = new XMLHttpRequest();
 
-	xhr.open('PUT', 'api/workouts/' + updatedCardioId);
+	xhr.open('PUT', 'api/workouts/' + cardioId);
 
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
 			if (xhr.status === 200) {
 				let updated = JSON.parse(xhr.responseText);
-				displayUpdateCardioSession(updated);
+				displayCardioSessionById(updated);
 			}
 			else {
 				displayError("ERROR updating Cardio Session" + xhr.status);
@@ -298,9 +318,9 @@ function updateCardioSession(updatedCardioId){
 		}
 
 
-	};
+	}
 	xhr.setRequestHeader('Content-type', 'application/json');
-	let updateCardioJson = JSON.stringify(updatedCardioId);
+	let updateCardioJson = JSON.stringify(cardioId);
 	console.log(updateCardioJson);
 	xhr.send(updateCardioJson);
 	
@@ -325,11 +345,11 @@ function displayUpdateCardioSession(cardio){
 	updateForm.id = "updateFormDiv";
 	updateDiv.appendChild(updateForm);
 	
-	let id = document.createElement('input');
-	id.type = "hidden";
+	/*let id = document.createElement('input');
+	id.type = "number";
 	id.name = "id";
-	id.value = cardio.id;
-	updateForm.appendChild(id);
+	id.id = 'id';
+	updateForm.appendChild(id);*/
 	
 	let enabled = document.createElement('input');
 	enabled.type = "hidden";
@@ -342,7 +362,7 @@ function displayUpdateCardioSession(cardio){
 	let titleInput = document.createElement('input');
 	
 	titleLabel.textContent = 'Title';
-	titleLabel.for = "title";
+	titleLabel.htmlFor = "title";
 	titleInput.name = "title";
 	titleInput.type = "text";
 	updateForm.appendChild(titleLabel);
@@ -365,7 +385,7 @@ function displayUpdateCardioSession(cardio){
 	let cdInput = document.createElement('input');
 	
 	cdLabel.textContent = 'Date';
-	cdLabel.for = 'date';
+	cdLabel.htmlFor = 'date';
 	cdInput.type = "date";
 	cdInput.name = 'date'
 	updateForm.appendChild(cdLabel);
@@ -378,7 +398,7 @@ function displayUpdateCardioSession(cardio){
 	let startInput = document.createElement('input');
 	
 	startLabel.textContent = 'Start Time';
-	startLabel.for = 'startTime';
+	startLabel.htmlFor = 'startTime';
 	startInput.name = 'startTime';
 	startInput.type = "time";
 	updateForm.appendChild(startLabel);
@@ -391,7 +411,7 @@ function displayUpdateCardioSession(cardio){
 	let stopInput = document.createElement('input');
 	
 	stopLabel.textContent = 'Stop Time';
-	stopLabel.for = 'stopTime';
+	stopLabel.htmlFor = 'stopTime';
 	stopInput.name = 'stopTime';
 	stopInput.type = "time";
 	updateForm.appendChild(stopLabel);
@@ -404,7 +424,7 @@ function displayUpdateCardioSession(cardio){
 	let distanceInput = document.createElement('input');
 	
 	distanceLabel.textContent = 'Distance';
-	distanceLabel.for = 'distance';
+	distanceLabel.htmlFor = 'distance';
 	distanceInput.name = 'distance';
 	distanceInput.type = "number";
 	updateForm.appendChild(distanceLabel);
@@ -417,7 +437,7 @@ function displayUpdateCardioSession(cardio){
 	let urlImageInput = document.createElement('input');
 	
 	urlImageLabel.textContent = 'Image-URL';
-	urlImageLabel.for = 'urlimage';
+	urlImageLabel.htmlFor = 'urlimage';
 	urlImageInput.name = 'urlimage';
 	updateForm.appendChild(urlImageLabel);
 	updateForm.appendChild(urlImageInput);
@@ -437,7 +457,7 @@ function displayUpdateCardioSession(cardio){
 	let typeOption8 = document.createElement('option');
 	
 	typeLabel.textContent = 'Choose the type of cardio: ';
-	typeLabel.for = 'type';
+	typeLabel.htmlFor = 'type';
 	typeSelect.name = 'type';
 	typeSelect.id = 'type';
 	updateForm.appendChild(typeLabel);
@@ -488,7 +508,7 @@ function displayUpdateCardioSession(cardio){
 	let DifficultyOption10 = document.createElement('option');
 	
 	DifficultyLabel.textContent = 'Choose the difficulty level: '
-	DifficultyLabel.for = 'difficultyLevel';
+	DifficultyLabel.htmlFor = 'difficultyLevel';
 	DifficultyeSelect.name = 'difficultyLevel';
 	DifficultyeSelect.id = 'difficultyLevel';
 	updateForm.appendChild(DifficultyLabel);
