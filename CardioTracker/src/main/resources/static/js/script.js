@@ -41,6 +41,7 @@ function init() {
 		e.preventDefault();
 		
 		let updateCardio = {
+			id: cardioId.id,
 			enabled: document.updateFormDiv.enabled.value,
 			title: document.updateFormDiv.title.value,
 			description: document.updateFormDiv.description.value,
