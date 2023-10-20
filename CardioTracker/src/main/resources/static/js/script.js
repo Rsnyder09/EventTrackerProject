@@ -41,7 +41,7 @@ function init() {
 		e.preventDefault();
 		
 		let updateCardio = {
-			id: cardioId.id,
+			/*id: cardioId.id,*/
 			enabled: document.updateFormDiv.enabled.value,
 			title: document.updateFormDiv.title.value,
 			description: document.updateFormDiv.description.value,
@@ -50,8 +50,8 @@ function init() {
 			stopTime: document.updateFormDiv.stopTime.value,
 			distance: document.updateFormDiv.distance.value,
 			urlimage: document.updateFormDiv.urlimage.value,
-			type: { id: document.updateFormDiv.type.value },
-			difficultyLevel: { id: document.updateFormDiv.difficultyLevel.value },
+			//type: { id: document.updateFormDiv.type.id.value },
+			//difficultyLevel: { id: document.updateFormDiv.difficultyLevel.id.value },
 		}
 		updateCardioSession(updateCardio);
 	});
