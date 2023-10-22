@@ -26,5 +26,49 @@ index(): Observable<Cardio[]>{
   );
 }
 
+create(cardio: Cardio): Observable<Cardio>{
+  cardio.enabled = false;
+return this.http.post<Cardio>(this.url,cardio).pipe(
+  catchError((err:any) => {
+    console.error(err);
+    return throwError(
+      () => new Error( 'CardioService.create(): error creating workout: ' + err)
+    );
+  })
+);
+}
+
+update(cardio: Cardio, id: number): Observable<Cardio> {
+  return this.http.put<Cardio>(this.url + '/' + id, cardio).pipe(
+    catchError((err:any) => {
+      console.error(err);
+      return throwError(
+        () => new Error( 'CardioService.update(): error updating workout: ' + err)
+      );
+    })
+  );
+}
+
+destroy(id: number){
+  return this.http.delete<Cardio>(this.url + '/' + id).pipe(
+    catchError((err:any) => {
+      console.error(err);
+      return throwError(
+        () => new Error( 'CardioService.destroy(): error destroying workout: ' + err)
+      );
+    })
+  );
+}
+
+show( id: number): Observable<Cardio>{
+  return this.http.get<Cardio>(this.url + '/' + id).pipe(
+    catchError((err:any) => {
+      console.error(err);
+      return throwError(
+        () => new Error( 'CardioService.show(): error showing workout: ' + err)
+      );
+    })
+  );
+}
 
 }

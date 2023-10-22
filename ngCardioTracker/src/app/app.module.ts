@@ -7,11 +7,22 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { WorkoutsComponent } from './components/workouts/workouts.component';
+import { AboutComponent } from './components/about/about.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { IncompletePipe } from './pipes/incomplete.pipe';
+import { CardioService } from './services/cardio.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    WorkoutsComponent,
+    AboutComponent,
+    NavigationComponent,
+    NotFoundComponent,
+    IncompletePipe
   ],
   imports: [
     BrowserModule,
@@ -20,7 +31,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     NgbModule
   ],
-  providers: [],
+  providers: [CardioService, IncompletePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

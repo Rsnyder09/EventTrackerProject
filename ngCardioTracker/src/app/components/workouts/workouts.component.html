@@ -1,0 +1,191 @@
+<h1 *ngIf="!selected">
+  {{ title }} <span class="badge" [ngClass]="getWorkoutCount() >= 10 ? 'bg-danger' : getWorkoutCount() >= 5 ? 'bg-warning' : 'bg-success'">{{ getWorkoutCount() }}</span>
+</h1>
+
+<div *ngIf="!selected && !addNewWorkout">
+  <table class="table table-striped table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>
+          <strong>Title</strong>
+        </th>
+        <th>
+          <strong>Date</strong>
+        </th>
+        <th>
+          <strong>Mark Complete</strong>
+        </th>
+        <th>
+          <strong>Completed</strong>
+        </th>
+        <th>
+          <strong>Delete</strong>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let workout of workouts | incomplete: showComplete">
+        <td [ngClass]="workout.enabled ? 'completed' : '' " (click)="displayWorkout(workout)">{{ workout.title }}</td>
+        <td>{{ workout.cardioDate }}</td>
+        <td>
+          <input
+            type="checkbox"
+            name="completed"
+            [(ngModel)]="workout.enabled"
+            (change)="updateWorkout(workout, workout.id)"
+          />
+        </td>
+        <td>{{ workout.enabled }}</td>
+        <td> <button (click)="deleteWorkout(workout.id)" class="btn btn-danger">X</button> </td>
+      </tr>
+    </tbody>
+  </table>
+
+  Show Completed: <input type="checkbox" [(ngModel)]="showComplete">
+
+  <div class="input-group mb-3">
+    <div class="input-group-prepend">
+
+
+      </div>
+
+    <button class="btn btn-primary" type="submit"  (click)="displayAddWorkout(newWorkout)">Add Workout</button>
+  </div>
+</div>
+
+<div *ngIf="addNewWorkout && !selected && !editWorkout ">
+  <form name="addnewworkout" >
+    <label for="title">Title: </label>
+    <input class="form-control" type="text" name="title" [(ngModel)]="newWorkout.title" />
+    <br />
+    <label for="description">Description: </label>
+    <input class="form-control" type="text" name="description" [(ngModel)]="newWorkout.description" />
+    <br />
+    <label for="distance">Distance: </label>
+    <input  class="form-control" type="number" name="distance" [(ngModel)]="newWorkout.distance" />
+    <br />
+    <label for="URLImage">Image URL: </label>
+    <input class="form-control" type="text" name="URLImage" [(ngModel)]="newWorkout.urlimage" />
+    <br />
+    <label for="cardioDate">Date: </label>
+    <input  type="date" name="cardioDate" [(ngModel)]="newWorkout.cardioDate" />
+    <br />
+    <label for="startTime">Start Time: </label>
+    <input  type="time" name="startTime" [(ngModel)]="newWorkout.startTime" />
+    <br />
+    <label for="stopTime">Stop Time: </label>
+    <input  type="time" name="stopTime" [(ngModel)]="newWorkout.stopTime" />
+    <br />
+    <label for ='type'>Choose the type of cardio: </label>
+	<select name="type" id="type" [(ngModel)]="newWorkout.type.id">
+		<option value="1">Walk</option>
+  		<option value="2">Hike</option>
+  		<option value="3">Run</option>
+  		<option value="4">Jump Rope</option>
+  		<option value="5">Row</option>
+  		<option value="6">Bike</option>
+  		<option value="7">Stairs</option>
+  		<option value="8">Swim</option>
+	</select>
+	<br>
+	<label for ='difficultyLevel'>Choose the difficulty level: </label>
+	<select name="difficultyLevel" id="difficultyLevel" [(ngModel)]="newWorkout.difficultyLevel.id">
+		<option value="1">Minimum Effort</option>
+  		<option value="2">Light And Easy</option>
+  		<option value="3">Comfortable Pace</option>
+  		<option value="4">Comfortable With Some Effort</option>
+  		<option value="5">Progressive Pace</option>
+  		<option value="6">Hard Activity</option>
+  		<option value="7">Vigorous Activity</option>
+  		<option value="8">Hard Intensity</option>
+  		<option value="9">Very Hard Intensity</option>
+  		<option value="10">All-Out Sprint</option>
+	</select>
+	<br>
+  <label for="completed">Completed?: </label>
+  <input  type="checkbox" name="completed" [(ngModel)]="newWorkout.enabled" />
+  <br />
+    <button class="btn btn-success" type="submit"  (click)="addWorkout(newWorkout)">Add</button>
+    <button class="btn btn-danger" type="submit" (click)="addNewWorkout = null">Cancel</button>
+  </form>
+
+</div>
+
+<div *ngIf="selected && !editWorkout">
+  <button class="btn btn-danger" (click)="displayTable()">Back</button>
+
+  <button class="btn btn-outline-primary" type="submit"  (click)="setEditWorkout()">Edit</button>
+  <p>ID: {{ selected.id }}</p>
+  <p>Title: {{ selected.title }}</p>
+  <p>Completed?: {{ selected.enabled }}</p>
+  <p>Description: {{ selected.description }}</p>
+  <p>Distance: {{ selected.distance }}</p>
+  <p>Start Time: {{ selected.startTime }}</p>
+  <p>Stop Time: {{ selected.stopTime }}</p>
+  <p>Date: {{ selected.cardioDate }}</p>
+  <p >Type: {{selected.type.name}}</p>
+  <p>Difficulty Level: {{ selected.difficultyLevel.name }}</p>
+  <br>
+  <p> <img src="{{selected.urlimage}}"></p>
+
+
+</div>
+
+
+<div *ngIf="editWorkout" class="mb-3">
+  <form  name="editworkout">
+    <label for="title">Title: </label>
+    <input class="form-control" type="text" name="title" [(ngModel)]="editWorkout.title" />
+    <br />
+    <label for="description">Description: </label>
+    <input class="form-control" type="text" name="description" [(ngModel)]="editWorkout.description" />
+    <br />
+    <label for="URLImage">Image URL: </label>
+    <input class="form-control"  type="text" name="URLImage" [(ngModel)]="editWorkout.urlimage" />
+    <br />
+    <label for="cardioDate">Date: </label>
+    <input  type="date" name="cardioDate" [(ngModel)]="editWorkout.cardioDate" />
+    <br />
+    <label for="distance">Distance: </label>
+    <input  type="number" name="distance" [(ngModel)]="editWorkout.distance" />
+    <br />
+    <label for="startTime">Start Time: </label>
+    <input  type="time" name="startTime" [(ngModel)]="editWorkout.startTime" />
+    <br />
+    <label for="stopTime">Stop Time: </label>
+    <input  type="time" name="stopTime" [(ngModel)]="editWorkout.stopTime" />
+    <br />
+    <label for ='type'>Choose the type of cardio: </label>
+	<select name="type" id="type" [(ngModel)]="editWorkout.type.id">
+		<option value="1">Walk</option>
+  		<option value="2">Hike</option>
+  		<option value="3">Run</option>
+  		<option value="4">Jump Rope</option>
+  		<option value="5">Row</option>
+  		<option value="6">Bike</option>
+  		<option value="7">Stairs</option>
+  		<option value="8">Swim</option>
+	</select>
+	<br>
+	<label for ='difficultyLevel'>Choose the difficulty level: </label>
+	<select name="difficultyLevel" id="difficultyLevel" [(ngModel)]="editWorkout.difficultyLevel.id">
+		<option value="1">Minimum Effort</option>
+  		<option value="2">Light And Easy</option>
+  		<option value="3">Comfortable Pace</option>
+  		<option value="4">Comfortable With Some Effort</option>
+  		<option value="5">Progressive Pace</option>
+  		<option value="6">Hard Activity</option>
+  		<option value="7">Vigorous Activity</option>
+  		<option value="8">Hard Intensity</option>
+  		<option value="9">Very Hard Intensity</option>
+  		<option value="10">All-Out Sprint</option>
+	</select>
+	<br>
+  <label for="completed">Completed?: </label>
+  <input  type="checkbox" name="completed" [(ngModel)]="editWorkout.enabled" />
+
+  <br />
+    <button class="btn btn-success" type="submit"  (click)="updateWorkout(editWorkout, editWorkout.id)">Save</button>
+    <button class="btn btn-danger" type="submit" (click)="editWorkout = null">Cancel</button>
+  </form>
+</div>
