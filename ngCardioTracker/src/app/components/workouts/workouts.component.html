@@ -1,4 +1,4 @@
-<h1 *ngIf="!selected">
+<h1 *ngIf="!selected && !addNewWorkout">
   {{ title }} <span class="badge" [ngClass]="getWorkoutCount() >= 10 ? 'bg-danger' : getWorkoutCount() >= 5 ? 'bg-warning' : 'bg-success'">{{ getWorkoutCount() }}</span>
 </h1>
 
@@ -6,6 +6,9 @@
   <table class="table table-striped table-hover">
     <thead class="table-dark">
       <tr>
+        <th>
+          <strong>ID</strong>
+        </th>
         <th>
           <strong>Title</strong>
         </th>
@@ -25,6 +28,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let workout of workouts | incomplete: showComplete">
+        <td>{{ workout.id }}</td>
         <td [ngClass]="workout.enabled ? 'completed' : '' " (click)="displayWorkout(workout)">{{ workout.title }}</td>
         <td>{{ workout.cardioDate }}</td>
         <td>
@@ -54,6 +58,11 @@
 </div>
 
 <div *ngIf="addNewWorkout && !selected && !editWorkout ">
+
+<h1>Add a workout</h1>
+<p>(*) required fields</p>
+
+
   <form name="addnewworkout" >
     <label for="title">Title: </label>
     <input class="form-control" type="text" name="title" [(ngModel)]="newWorkout.title" />
@@ -76,8 +85,8 @@
     <label for="stopTime">Stop Time: </label>
     <input  type="time" name="stopTime" [(ngModel)]="newWorkout.stopTime" />
     <br />
-    <label for ='type'>Choose the type of cardio: </label>
-	<select name="type" id="type" [(ngModel)]="newWorkout.type.id">
+    <label for ='type'>* Choose the type of cardio: </label>
+	<select name="type" id="type" [(ngModel)]="newWorkout.type.id" required value="1">
 		<option value="1">Walk</option>
   		<option value="2">Hike</option>
   		<option value="3">Run</option>
@@ -88,8 +97,8 @@
   		<option value="8">Swim</option>
 	</select>
 	<br>
-	<label for ='difficultyLevel'>Choose the difficulty level: </label>
-	<select name="difficultyLevel" id="difficultyLevel" [(ngModel)]="newWorkout.difficultyLevel.id">
+	<label for ='difficultyLevel'>* Choose the difficulty level: </label>
+	<select name="difficultyLevel" id="difficultyLevel" [(ngModel)]="newWorkout.difficultyLevel.id" required value="1">
 		<option value="1">Minimum Effort</option>
   		<option value="2">Light And Easy</option>
   		<option value="3">Comfortable Pace</option>
@@ -102,7 +111,7 @@
   		<option value="10">All-Out Sprint</option>
 	</select>
 	<br>
-  <label for="completed">Completed?: </label>
+  <label for="completed" value="false">Completed?: </label>
   <input  type="checkbox" name="completed" [(ngModel)]="newWorkout.enabled" />
   <br />
     <button class="btn btn-success" type="submit"  (click)="addWorkout(newWorkout)">Add</button>
